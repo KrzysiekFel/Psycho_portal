@@ -8,7 +8,7 @@
             <small class="text-muted">{{ object.date_posted }}</small>
         </div>
         <h2><a class="post-title" href="register/">{{ object.title }}</a></h2>
-        <p class="post-content">{{ object.content }}</p>
+        <p class="post-content">{{ object.content|linebreaks }}</p>
     </div>
 </post>
 {% endblock %}

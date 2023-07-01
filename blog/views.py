@@ -13,7 +13,7 @@ class BlogPostsListView(ListView):
     template_name = 'home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
-    paginate_by = 4
+    paginate_by = 3
 
 
 class PostDetailedView(DetailView):
