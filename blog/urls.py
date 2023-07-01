@@ -1,5 +1,5 @@
 """
-URL configuration for Psycho_portal project.
+URL configuration for Psycho_portal/blog project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -14,16 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.contrib.auth import views as auth_views
-from users import views as users_view
+from django.urls import path
+from .views import about, BlogPostsListView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
-    path('profile/', users_view.profile, name='profile'),
-    path('register/', users_view.register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout')
+    path('', BlogPostsListView.as_view(), name='blog-posts'),
+    path('about/', about, name='about'),
 ]
