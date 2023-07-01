@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'fear_tracker.apps.FearTrackerConfig',
     'crispy_forms',
     'crispy_bootstrap4',
-
+    'datetimepicker',
 ]
 
 MIDDLEWARE = [
