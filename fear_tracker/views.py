@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def fear_tracker(request):
+    return render(request, 'fear_tracker.html', {'title': 'Fear Tracker'})
