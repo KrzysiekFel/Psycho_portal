@@ -5,7 +5,7 @@ from django.db import models
 
 class BlogPosts(models.Model):
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content = models.TextField(autoescape=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
