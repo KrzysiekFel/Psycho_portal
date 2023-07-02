@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'blog.apps.BlogConfig',
     'fear_tracker.apps.FearTrackerConfig',
+    'personality_test.apps.PersonalityTestConfig',
+
     'crispy_forms',
     'crispy_bootstrap4',
 ]

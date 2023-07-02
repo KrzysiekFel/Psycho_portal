@@ -1,0 +1,7 @@
+{% extends 'base.html'%}
+{% block content %}
+<h2>Personality Test</h2>
+    <p></p>
+    <a href="{% url 'test-create' %}" class="btn btn-primary">Take test</a>
+    <a href="{% url 'test-result' %}" class="btn btn-primary">See results</a>
+{% endblock %}
