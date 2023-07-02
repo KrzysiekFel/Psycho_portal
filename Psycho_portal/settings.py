@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'fear_tracker.apps.FearTrackerConfig',
     'crispy_forms',
     'crispy_bootstrap4',
-    'datetimepicker',
 ]
 
 MIDDLEWARE = [
@@ -146,4 +145,4 @@ LOGIN_REDIRECT_URL = 'blog-posts'
 LOGIN_URL = 'login'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'

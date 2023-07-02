@@ -31,13 +31,14 @@ class YourChartView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        queryset = FearTracker.objects.all()
+        user_id = self.request.user.id
+        queryset = FearTracker.objects.filter(author_id=user_id).order_by('date')
 
-        x = [f.date.strftime('%Y-%m-%d %H:%M:%S') for f in queryset]
+        x = [f.date.strftime('%Y-%m-%d') for f in queryset]
         y = [f.fear_level for f in queryset]
 
-        plt.plot(x, y)
-        plt.xlabel('Date and time')
+        plt.plot(x, y, 'xb-')
+        plt.xlabel('Date')
         plt.ylabel('Fear level')
         plt.title('Fear level plot')
 
@@ -45,6 +46,6 @@ class YourChartView(TemplateView):
         plt.savefig(chart_image)
         plt.close()
 
-        context['chart_image'] = os.path.join(settings.MEDIA_URL, chart_image)
+        context['chart_image'] = os.path.join(settings.MEDIA_URL, 'chart_image.jpg')
 
         return context
