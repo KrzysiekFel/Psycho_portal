@@ -1,3 +1,18 @@
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
 
-# Create your models here.
+CHOICES = [(1, 1),
+           (2, 2)]
+
+
+class PersonalityTest(models.Model):
+    question_1 = models.IntegerField(choices=CHOICES)
+    question_2 = models.IntegerField(choices=CHOICES)
+    question_3 = models.IntegerField(choices=CHOICES)
+    question_4 = models.IntegerField(choices=CHOICES)
+    question_5 = models.IntegerField(choices=CHOICES)
+    question_6 = models.IntegerField(choices=CHOICES)
+    question_7 = models.IntegerField(choices=CHOICES)
+    date_posted = models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
