@@ -27,7 +27,7 @@ class FearCreateView(LoginRequiredMixin, CreateView):
 
 
 class YourChartView(LoginRequiredMixin, TemplateView):
-    template_name = 'plot_fear.html'
+    template_name = 'fear_tracker_plot.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
