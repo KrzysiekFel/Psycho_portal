@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
 
     {% if title %}
-        <title>Blog - {{ title }}</title>
+        <title>{{ title }}</title>
     {% else %}
         <title>Blog</title>
     {% endif %}
@@ -30,6 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link" href="{% url 'fear-tracker' %}">Fear Tracker</a>
+                        <a class="nav-item nav-link" href="{% url 'personality-test' %}">Personality Test</a>
                         <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
                     </div>
                     <!-- Navbar Right Side -->
