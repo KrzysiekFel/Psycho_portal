@@ -26,7 +26,7 @@ class FearCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class YourChartView(TemplateView):
+class YourChartView(LoginRequiredMixin, TemplateView):
     template_name = 'plot_fear.html'
 
     def get_context_data(self, **kwargs):
