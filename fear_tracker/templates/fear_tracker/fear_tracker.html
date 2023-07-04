@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Fear Tracker</h2>
-    <p>Fear Tracker is a tool where you can add records of your fear level and plot to see how your fear has changed.</p>
+    <p>Fear Tracker is a tool where you can add records of your fear level and plot to see how your fear has changed.
+    It is suggested that records should be recorded every day at the same time.
+    Tool is very useful for monitoring fear level during pharmacotherapy for Anxiety disorders like:
+    Generalized Anxiety Disorder, Social anxiety disorder, Obsessive-compulsive disorder.</p>
     <a href="{% url 'fear-create' %}" class="btn btn-primary">Add records</a>
     <a href="{% url 'fear-plot' %}" class="btn btn-primary">Plots</a>
 {% endblock %}

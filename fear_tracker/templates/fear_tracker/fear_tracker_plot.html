@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Plot for your all fear levels</h1>
-    <img src="{{ chart_image }}" alt="Wykres">
+    <h1>Chart of your anxiety level </h1>
+        <div class="plot-container">
+            {% autoescape off %}
+            {{ plot_div }}
+            {% endautoescape %}
+        </div>
 {% endblock %}

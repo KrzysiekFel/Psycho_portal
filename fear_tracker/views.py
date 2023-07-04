@@ -5,9 +5,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import FearTracker
 from .forms import FearTrackerForm
 from django.contrib import messages
-import matplotlib.pyplot as plt
 from django.conf import settings
 import os
+from plotly.offline import plot
+from plotly.graph_objs import Scatter
 
 
 def fear_tracker(request):
@@ -37,15 +38,8 @@ class YourChartView(LoginRequiredMixin, TemplateView):
         x = [f.date.strftime('%Y-%m-%d') for f in queryset]
         y = [f.fear_level for f in queryset]
 
-        plt.plot(x, y, 'xb-')
-        plt.xlabel('Date')
-        plt.ylabel('Fear level')
-        plt.title('Fear level plot')
-
-        chart_image = 'media/chart_image.jpg'
-        plt.savefig(chart_image)
-        plt.close()
-
-        context['chart_image'] = os.path.join(settings.MEDIA_URL, 'chart_image.jpg')
+        plot_div = plot([Scatter(x=x, y=y, mode='lines', name='test', opacity=0.8, marker_color='green')],
+                        output_type='div')
+        context['plot_div'] = plot_div
 
         return context
