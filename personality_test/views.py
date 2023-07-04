@@ -26,13 +26,13 @@ EXTRAVERT_INFO = "Being an extrovert means that you draw energy and feel more al
 
 
 def personality_test(request):
-    return render(request, 'personality_test.html', {'title': 'Personality Test'})
+    return render(request, 'personality_test/personality_test.html', {'title': 'Personality Test'})
 
 
 class PersonalityTestView(LoginRequiredMixin, CreateView):
     model = PersonalityTest
     form_class = PersonalityForm
-    template_name = 'personality_test_form.html'
+    template_name = 'personality_test/personality_test_form.html'
     success_url = reverse_lazy('personality-test')
 
     def form_valid(self, form):
@@ -42,7 +42,7 @@ class PersonalityTestView(LoginRequiredMixin, CreateView):
 
 
 class TestResultView(LoginRequiredMixin, ListView):
-    template_name = 'personality_test_result.html'
+    template_name = 'personality_test/personality_test_result.html'
     model = PersonalityTest
 
     def get_queryset(self):

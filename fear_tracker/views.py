@@ -11,13 +11,13 @@ import os
 
 
 def fear_tracker(request):
-    return render(request, 'fear_tracker.html', {'title': 'Fear Tracker'})
+    return render(request, 'fear_tracker/fear_tracker.html', {'title': 'Fear Tracker'})
 
 
 class FearCreateView(LoginRequiredMixin, CreateView):
     model = FearTracker
     form_class = FearTrackerForm
-    template_name = 'fear_tracker_form.html'
+    template_name = 'fear_tracker/fear_tracker_form.html'
     success_url = reverse_lazy('fear-tracker')
 
     def form_valid(self, form):
@@ -27,7 +27,7 @@ class FearCreateView(LoginRequiredMixin, CreateView):
 
 
 class YourChartView(LoginRequiredMixin, TemplateView):
-    template_name = 'fear_tracker_plot.html'
+    template_name = 'fear_tracker/fear_tracker_plot.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

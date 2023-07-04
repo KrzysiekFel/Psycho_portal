@@ -10,7 +10,7 @@ def about(request):
 
 class BlogPostsListView(ListView):
     model = BlogPosts
-    template_name = 'home.html'
+    template_name = 'blog/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 3
@@ -18,4 +18,4 @@ class BlogPostsListView(ListView):
 
 class PostDetailedView(DetailView):
     model = BlogPosts
-    template_name = 'post.html'
+    template_name = 'blog/post.html'
