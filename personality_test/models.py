@@ -16,3 +16,15 @@ class PersonalityTest(models.Model):
     question_7 = models.IntegerField(choices=CHOICES)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+#
+# class Question(models.Model):
+#     # question number
+#     # question # -> TEXT FIELD
+#     # answer
+#     pass
+#
+#
+# class PersonalityTest(models.Model):
+#     questions = models.ManyToManyField(Question)
+#     date_posted = models.DateTimeField(default=timezone.now)
+#     author = models.ForeignKey(User, on_delete=models.CASCADE)

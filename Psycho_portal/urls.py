@@ -31,3 +31,17 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# TODO: (DONE) modify templates folder
+# TODO: (DONE) center pagination
+# TODO: (DONE) after viewing post add button to get back to all posts
+# TODO: (DONE) change plots for plotly (dynamically created)
+# TODO: (DONE) add photo for users
+# TODO: add hierarchy of users and authentication
+# TODO: modify models for tests/questions
+# TODO: add possibility for user to create own test, accepted by admin
+# TODO: all tests visible on one endpoint
+# TODO: on profile endpoint add availability to see users test and able to update?
+# TODO: REST API for creating tests
+# TODO: Unit tests: blog(DONE), fear_tracker(), personality_test(), users()
+# TODO: Add default image for created test , like profile pict
