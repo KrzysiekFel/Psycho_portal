@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'blog.apps.BlogConfig',
+    'users.apps.UsersConfig',
     'fear_tracker.apps.FearTrackerConfig',
     'personality_test.apps.PersonalityTestConfig',
 
