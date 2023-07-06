@@ -36,11 +36,11 @@ urlpatterns = [
 # TODO: (DONE) center pagination
 # TODO: (DONE) after viewing post add button to get back to all posts
 # TODO: (DONE) change plots for plotly (dynamically created)
-# TODO: add photo for users and tests
-# TODO: add hierarchy of users
+# TODO: add photo for users
+# TODO: add hierarchy of users and authentication
 # TODO: modify models for tests/questions
 # TODO: add possibility for user to create own test, accepted by admin
 # TODO: all tests visible on one endpoint
 # TODO: on profile endpoint add availability to see users test and able to update?
 # TODO: REST API for creating tests
-# TODO: Unit tests: psycho_portal(), blog(), fear_tracker(), personality_test()
+# TODO: Unit tests: blog(DONE), fear_tracker(), personality_test(), users()
