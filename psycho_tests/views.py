@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class PsychoTestsListView(ListView):
     model = PsychoTest
-    template_name = 'personality_test/personality_test.html'
+    template_name = 'psycho_tests/psycho_tests_home.html'
     context_object_name = 'tests'
     ordering = ['-date_creation']
 
@@ -17,8 +17,8 @@ class PsychoTestsListView(ListView):
 class CreateTestView(LoginRequiredMixin, CreateView):
     model = PsychoTest
     form_class = TestForm
-    template_name = 'personality_test/personality_create_test.html'
-    success_url = reverse_lazy('personality-tests')
+    template_name = 'psycho_tests/psycho_tests_create.html'
+    success_url = reverse_lazy('psycho-tests')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -31,7 +31,7 @@ class TestFillView(View):
         test = PsychoTest.objects.get(pk=test_id)
         questions = test.questions.all()
         form = TestFillForm(questions=questions)
-        return render(request, 'personality_test/personality_test_detail.html', {'test': test, 'form': form})
+        return render(request, 'psycho_tests/psycho_tests_detail.html', {'test': test, 'form': form})
 
     def post(self, request, test_id):
         test = PsychoTest.objects.get(pk=test_id)
@@ -53,7 +53,7 @@ class TestFillView(View):
 
             return redirect('test-result', result_id=result.id)
 
-        return render(request, 'personality_test/personality_test_detail.html', {'test': test, 'form': form})
+        return render(request, 'psycho_tests/psycho_tests_detail.html', {'test': test, 'form': form})
 
 
 class TestResultView(View):
@@ -72,4 +72,4 @@ class TestResultView(View):
             'result_description': result_description
         }
 
-        return render(request, 'personality_test/personality_test_result.html', context)
+        return render(request, 'psycho_tests/psycho_tests_result.html', context)

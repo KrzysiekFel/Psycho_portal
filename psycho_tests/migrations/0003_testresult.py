@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('personality_test', '0002_question_psychotest'),
+        ('psycho_tests', '0002_question_psychotest'),
     ]
 
     operations = [
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('score', models.IntegerField()),
                 ('date_creation', models.DateTimeField(default=django.utils.timezone.now)),
-                ('test', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='personality_test.psychotest')),
+                ('test', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='psycho_tests.psychotest')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

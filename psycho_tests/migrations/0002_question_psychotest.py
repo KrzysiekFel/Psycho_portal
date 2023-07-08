@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('personality_test', '0001_initial'),
+        ('psycho_tests', '0001_initial'),
     ]
 
     operations = [
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('result_above_threshold', models.CharField(max_length=100)),
                 ('result_below_threshold', models.CharField(max_length=100)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('questions', models.ManyToManyField(to='personality_test.question')),
+                ('questions', models.ManyToManyField(to='psycho_tests.question')),
             ],
         ),
     ]

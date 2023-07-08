@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'fear_tracker.apps.FearTrackerConfig',
-    'personality_test.apps.PersonalityTestConfig',
+    'psycho_tests.apps.PsychoTestsConfig',
 
     'crispy_forms',
     'crispy_bootstrap4',

@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('fear_tracker/', include('fear_tracker.urls')),
-    path('personality_test/', include('personality_test.urls')),
+    path('psycho_tests/', include('psycho_tests.urls')),
     path('profile/', users_view.profile, name='profile'),
     path('register/', users_view.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
@@ -41,15 +41,16 @@ urlpatterns = [
 # TODO: (DONE) modify models for tests/questions
 # TODO: (DONE) add possibility for user to create own test
 # TODO: (DANE) all tests visible at one endpoint
-# TODO: user is able to complete any test
+# TODO: (DONE) user is able to complete any test
 
 # TODO: REST API for creating tests
 
-# TODO: Unit tests: blog(DONE), fear_tracker(ALMOST DONE), personality_test(), users(DONE)
+# TODO: Unit tests: blog(DONE), fear_tracker(ALMOST DONE), psycho_tests(), users(DONE)
 
 # TODO: test should be accepted by admin
 # TODO: add hierarchy of users and authorization
 # TODO: on profile endpoint add availability to see user created tests and able to update tests?
+# TODO: add postgres db
 
 
 
