@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Test Result</h2>
+    <p>Test: {{ result.test.name }}</p>
+    <p>Score: {{ result.score }}</p>
+    <p>Result: {% if result.score >= result.test.threshold %}{{ result.test.result_above_threshold }}{% else %}{{ result.test.result_below_threshold }}{% endif %}</p>
+{% endblock %}

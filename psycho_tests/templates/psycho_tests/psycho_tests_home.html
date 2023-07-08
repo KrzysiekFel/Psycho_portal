@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Psycho Tests</h2>
+    <p></p>
+    <a href="{% url 'create-test' %}" class="btn btn-primary">Create test</a>
+    <p></p>
+    <div class="row">
+    {% for test in tests %}
+    <div class="col-md-4 mb-4">
+        <article class="media content-section">
+            <a href="{% url 'test-detail' test.id %}">
+                <img class="rounded-circle article-img" src="{{ test.image.url }}" />
+            </a>
+            <div class="media-body">
+                <div class="article-metadata">
+                    <div class="name-wrapper">
+                        <a class="mr-2" href="{% url 'test-detail' test.id %}">{{ test.name }}</a>
+                    </div>
+                    <div class="author-wrapper">
+                        <small class="mr-2">{{ test.author }}</small>
+                    </div>
+                </div>
+                <small class="text-muted">{{ test.description|truncatechars:100 }}</small>
+            </div>
+        </article>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

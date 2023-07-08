@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class BlogPostModelTest(TestCase):
-    def setUp(self) -> None:
+    def setUp(self):
         test_user = User.objects.create(username='test_user', password='test_password')
         self.test_post = BlogPosts.objects.create(title='test_title', content='test_content', author=test_user)
 
