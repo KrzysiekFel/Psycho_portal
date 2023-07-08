@@ -5,17 +5,25 @@
     <a href="{% url 'test-create' %}" class="btn btn-primary">Take test</a>
     <a href="{% url 'test-result' %}" class="btn btn-primary">See results</a>
     <a href="{% url 'create-test' %}" class="btn btn-primary">Create test</a>
+    <p></p>
+    <div class="row">
     {% for test in tests %}
+    <div class="col-md-4 mb-4">
         <article class="media content-section">
-            <img class="rounded-circle article-img" src="{{ test.author.profile.image.url }}" />
+            <a href="{% url 'post-detail' test.id %}">
+                <img class="rounded-circle article-img" src="{{ test.image.url }}" />
+            </a>
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2">{{ test.author }}</a>
-                    <small class="text-muted">{{ test.date_creation }}</small>
+                    <a class="mr-2" href="{% url 'post-detail' test.id %}">{{ test.title }}</a>
+                    <small class="text-muted">{{ test.author }}</small>
                 </div>
-                <h2><a class="article-title" href="{% url 'post-detail' test.id %}">{{ test.title }}</a></h2>
-                <p class="article-content">{{ test.content|truncatechars:500 }}</p>
+                <h2><a class="article-title" href="{% url 'post-detail' test.id %}">{{ test.description }}</a></h2>
+                <p class="article-content">{{ test.description|truncatechars:100 }}</p>
             </div>
         </article>
+    </div>
     {% endfor %}
+</div>
 {% endblock %}
+
