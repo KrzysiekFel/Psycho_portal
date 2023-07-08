@@ -82,7 +82,7 @@ class CreateTestView(LoginRequiredMixin, CreateView):
     model = PsychoTest
     form_class = TestForm
     template_name = 'personality_test/create_test.html'
-    success_url = reverse_lazy('personality-test')
+    success_url = reverse_lazy('personality-tests')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
