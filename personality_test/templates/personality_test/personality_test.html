@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Personality Test</h2>
-    <p>This is a personality test for Extravert/Introvert aspect.</p>
+<h2>Personality Tests</h2>
+    <p></p>
     <a href="{% url 'test-create' %}" class="btn btn-primary">Take test</a>
     <a href="{% url 'test-result' %}" class="btn btn-primary">See results</a>
+    <a href="{% url 'create-test' %}" class="btn btn-primary">Create test</a>
+    {% for test in tests %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ test.author.profile.image.url }}" />
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2">{{ test.author }}</a>
+                    <small class="text-muted">{{ test.date_creation }}</small>
+                </div>
+                <h2><a class="article-title" href="{% url 'post-detail' test.id %}">{{ test.title }}</a></h2>
+                <p class="article-content">{{ test.content|truncatechars:500 }}</p>
+            </div>
+        </article>
+    {% endfor %}
 {% endblock %}

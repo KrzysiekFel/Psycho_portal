@@ -38,14 +38,18 @@ urlpatterns = [
 # TODO: (DONE) change plots for plotly (dynamically created)
 # TODO: (DONE) add photo for users
 
-# TODO: modify models for tests/questions
-# TODO: add possibility for user to create own test, accepted by admin
+# TODO: (DONE) modify models for tests/questions
+# TODO: (DONE) add possibility for user to create own test
 # TODO: all tests visible on one endpoint
 
 # TODO: REST API for creating tests
 
-# TODO: Unit tests: blog(DONE), fear_tracker(ALMOST DONE), personality_test(LATER), users(DONE)
+# TODO: Unit tests: blog(DONE), fear_tracker(ALMOST DONE), personality_test(), users(DONE)
 
+# TODO: test should be accepted by admin
 # TODO: add hierarchy of users and authorization
 # TODO: on profile endpoint add availability to see users test and able to update?
 # TODO: Add default image for created test , like profile pict
+
+# TODO: (DONE) center profile picture and delete in post details click on author
+

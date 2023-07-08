@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import PersonalityTest
-from .forms import PersonalityForm
+from .models import PersonalityTest, PsychoTest
+from .forms import PersonalityForm, TestForm
 from django.views.generic import CreateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms.models import inlineformset_factory
 
 
 INTROVERT_INFO = "Being an introvert means that you gain energy and find solace through internal reflection and " \
@@ -27,6 +28,13 @@ EXTRAVERT_INFO = "Being an extrovert means that you draw energy and feel more al
 
 def personality_test(request):
     return render(request, 'personality_test/personality_test.html', {'title': 'Personality Test'})
+
+
+class PsychoTestsListView(ListView):
+    model = PsychoTest
+    template_name = 'personality_test/personality_test.html'
+    context_object_name = 'tests'
+    ordering = ['-date_creation']
 
 
 class PersonalityTestView(LoginRequiredMixin, CreateView):
@@ -68,3 +76,15 @@ class TestResultView(LoginRequiredMixin, ListView):
         context['personality_detailed'] = personality_detailed
 
         return context
+
+
+class CreateTestView(LoginRequiredMixin, CreateView):
+    model = PsychoTest
+    form_class = TestForm
+    template_name = 'personality_test/create_test.html'
+    success_url = reverse_lazy('personality-test')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        messages.success(self.request, 'Test added successfully.')
+        return super().form_valid(form)
