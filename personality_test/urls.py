@@ -1,13 +1,9 @@
 from django.urls import path
-from .views import personality_test, PersonalityTestView, TestResultView, CreateTestView, PsychoTestsListView
+from .views import TestResultView, CreateTestView, PsychoTestsListView, TestFillView
 
 urlpatterns = [
     path('', PsychoTestsListView.as_view(), name='personality-tests'),
     path('create/', CreateTestView.as_view(), name='create-test'),
-
-
-    # old to correct
-    path('new/', PersonalityTestView.as_view(), name='test-create'),
-    path('result/', TestResultView.as_view(), name='test-result'),
-
+    path('test/<int:test_id>', TestFillView.as_view(), name='test-detail'),
+    path('result/<int:result_id>/', TestResultView.as_view(), name='test-result'),
 ]

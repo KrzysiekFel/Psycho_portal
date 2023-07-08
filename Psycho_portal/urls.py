@@ -32,16 +32,15 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# TODO: (DONE) modify templates folder
+# TODO: (DONE) modify template folders
 # TODO: (DONE) center pagination
 # TODO: (DONE) after viewing post add button to get back to all posts
 # TODO: (DONE) change plots for plotly (dynamically created)
 # TODO: (DONE) add photo for users
 # TODO: (DONE) center profile picture and delete in post details click on author
-
 # TODO: (DONE) modify models for tests/questions
 # TODO: (DONE) add possibility for user to create own test
-# TODO: (DANE) all tests visible on one endpoint
+# TODO: (DANE) all tests visible at one endpoint
 # TODO: user is able to complete any test
 
 # TODO: REST API for creating tests

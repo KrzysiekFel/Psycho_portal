@@ -1,20 +1,5 @@
 from django import forms
-from .models import PersonalityTest, PsychoTest, Question
-
-
-class PersonalityForm(forms.ModelForm):
-    class Meta:
-        model = PersonalityTest
-        fields = ['question_1', 'question_2', 'question_3', 'question_4', 'question_5', 'question_6', 'question_7']
-        help_texts = {
-            'question_1': '1. Are generally sociable    2. Are generally quiet',
-            'question_2': '1. Are focused on the outer world    2. Are focused on their inner world',
-            'question_3': '1. Get energy by spending time with others   2. Get energy by spending time alone',
-            'question_4': '1. Talk a lot & start conversations  2. Mostly listen & wait for others to talk first',
-            'question_5': '1. Speak first, then think   2. Think first, then speak',
-            'question_6': '1. Are quick to take action  2. Are slow to take action',
-            'question_7': '1. Have many friends & many interests    2. Have a few deep friendships & refined interests',
-        }
+from .models import PsychoTest, Question
 
 
 class TestForm(forms.ModelForm):
@@ -37,7 +22,7 @@ class TestForm(forms.ModelForm):
             'image': 'Add image, if not default will be added.',
             'description': 'What is your test about.',
             'threshold': 'Set a integer number which will be the threshold for two results.',
-            'result_above_threshold': 'Description of test result when score is above and equal threshold.',
+            'result_above_threshold': 'Description of test result when score is above or equal threshold.',
             'result_below_threshold': 'Description of test result when score is below threshold.',
         }
 
@@ -59,3 +44,20 @@ class TestForm(forms.ModelForm):
                     question = Question.objects.create(question_content=custom_question_content)
                     test.questions.add(question)
         return test
+
+
+class TestFillForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        questions = kwargs.pop('questions')
+        super().__init__(*args, **kwargs)
+
+        for question in questions:
+            choices = (
+                ('1', '1'),
+                ('2', '2')
+            )
+            self.fields[f'question_{question.id}'] = forms.ChoiceField(
+                label=question.question_content,
+                choices=choices,
+                widget=forms.RadioSelect
+            )

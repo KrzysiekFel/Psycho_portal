@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ test.name }}</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        {{ field.label_tag }} {{ field }}
+        <br>
+      {% endfor %}
+      <button type="submit">Submit</button>
+    </form>
+{% endblock %}

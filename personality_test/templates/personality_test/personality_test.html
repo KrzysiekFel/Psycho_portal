@@ -2,21 +2,19 @@
 {% block content %}
 <h2>Personality Tests</h2>
     <p></p>
-    <a href="{% url 'test-create' %}" class="btn btn-primary">Take test</a>
-    <a href="{% url 'test-result' %}" class="btn btn-primary">See results</a>
     <a href="{% url 'create-test' %}" class="btn btn-primary">Create test</a>
     <p></p>
     <div class="row">
     {% for test in tests %}
     <div class="col-md-4 mb-4">
         <article class="media content-section">
-            <a href="{% url 'post-detail' test.id %}">
+            <a href="{% url 'test-detail' test.id %}">
                 <img class="rounded-circle article-img" src="{{ test.image.url }}" />
             </a>
             <div class="media-body">
                 <div class="article-metadata">
                     <div class="name-wrapper">
-                        <a class="mr-2" href="{% url 'post-detail' test.id %}">{{ test.name }}</a>
+                        <a class="mr-2" href="{% url 'test-detail' test.id %}">{{ test.name }}</a>
                     </div>
                     <div class="author-wrapper">
                         <small class="mr-2">{{ test.author }}</small>

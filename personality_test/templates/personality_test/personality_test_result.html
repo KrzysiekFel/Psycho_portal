@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Here is your result from last submitted test:</h2>
-    <h4>Your personality type is: {{ personality_type }}.</h4>
-    <br>
-    <br>
-    <p>What it means to be {{ personality_type }} person?</p>
-    <p>{{ personality_detailed }}</p>
+    <h2>Test Result</h2>
+    <p>Test: {{ result.test.name }}</p>
+    <p>Score: {{ result.score }}</p>
+    <p>Threshold: {{ result.test.threshold }}</p>
+    <p>Result: {% if result.score >= result.test.threshold %}{{ result.test.result_above_threshold }}{% else %}{{ result.test.result_below_threshold }}{% endif %}</p>
 {% endblock %}
