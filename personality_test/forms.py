@@ -25,7 +25,8 @@ class TestForm(forms.ModelForm):
     custom_questions = forms.CharField(max_length=500,
                                        required=False,
                                        widget=forms.Textarea,
-                                       help_text='Enter up to 5 custom questions, each on a new line')
+                                       help_text='Enter up to 5 custom questions, each on a new line. Example:'
+                                                 '"Mostly: 1.I am confident 2.I dont feel confident')
 
     class Meta:
         model = PsychoTest
@@ -36,7 +37,7 @@ class TestForm(forms.ModelForm):
             'image': 'Add image, if not default will be added.',
             'description': 'What is your test about.',
             'threshold': 'Set a integer number which will be the threshold for two results.',
-            'result_above_threshold': 'Description of test result when score is above threshold.',
+            'result_above_threshold': 'Description of test result when score is above and equal threshold.',
             'result_below_threshold': 'Description of test result when score is below threshold.',
         }
 
