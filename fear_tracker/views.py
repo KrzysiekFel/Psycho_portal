@@ -5,8 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import FearTracker
 from .forms import FearTrackerForm
 from django.contrib import messages
-from django.conf import settings
-import os
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
 

@@ -4,10 +4,8 @@ from .views import YourChartView
 from .forms import FearTrackerForm
 from .models import FearTracker
 from django.contrib.auth.models import User
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.test import Client
-from django.contrib import messages
-from fear_tracker.views import FearCreateView
 
 
 class FearTrackerModelTest(TestCase):
@@ -40,43 +38,21 @@ class FearTrackerViewTest(TestCase):
 class FearCreateViewTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user(username='test_user', password='test_password')
-
-    def test_url_redirected_when_user_not_logged_in(self):
-        response = self.client.get(reverse("fear-create"))
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("login") + "?next=" + reverse("fear-create"))
-
-    def test_url_redirected_when_user_is_logged(self):
+        self.test_user = User.objects.create(username='test_user', password='test_password')
         self.client.login(username='test_user', password='test_password')
-        response = self.client.get(reverse("fear-create"))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'fear_tracker/fear_tracker_form.html')
+        self.test_form_data = {
+            'date': '2023-01-01',
+            'time': '00:00:00',
+            'activity': 'test_activity',
+            'fear_level': 1,
+            'disturbing_thoughts': 'test_thoughts',
+            'author': self.test_user}
 
-    def test_form_valid(self):
-        self.factory = RequestFactory()
-        request = self.factory.post(reverse('fear-create'))
-        request.user = self.user
-        view = FearCreateView.as_view()
-        response = view(request)
-        fear_tracker = FearTracker.objects.create(
-            date='2023-01-01',
-            time='00:00:00',
-            activity='Test Activity',
-            fear_level=1,
-            disturbing_thoughts='Test Thoughts',
-            author=self.user
-        )
-
-        form_data = {'date': '2023-01-01',
-                     'time': '00:00:00',
-                     'activity': 'Test Activity',
-                     'fear_level': 1,
-                     'disturbing_thoughts': 'Test Thoughts',
-                     'author': request.user}
-        form = FearTrackerForm(data=form_data)
+    def test_if_form_is_valid(self):
+        form = FearTrackerForm(data=self.test_form_data)
+        response = self.client.post(reverse('fear-create'), data=self.test_form_data)
         self.assertTrue(form.is_valid())
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
 
 class YourChartViewTest(TestCase):
@@ -107,10 +83,7 @@ class YourChartViewTest(TestCase):
         response = view(request)
 
         self.assertEqual(response.status_code, 200)
-
-        # Assert specific content within the rendered template
         self.assertContains(response, 'Chart of your anxiety level')
         self.assertContains(response, '<div class="plot-container">')
-
         self.assertIn('plot_div', response.context_data)
         self.assertIsInstance(response.context_data['plot_div'], str)

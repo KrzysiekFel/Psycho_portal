@@ -7,7 +7,7 @@ class TestForm(forms.ModelForm):
                                                widget=forms.SelectMultiple(attrs={'class': 'select-list'}),
                                                required=False,
                                                help_text='(Optional): Choose questions from existing database.')
-    custom_questions = forms.CharField(max_length=500,
+    custom_questions = forms.CharField(max_length=1000,
                                        required=False,
                                        widget=forms.Textarea,
                                        help_text='Enter up to 5 custom questions, each on a new line. Example:'

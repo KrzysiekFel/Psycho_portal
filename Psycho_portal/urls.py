@@ -44,10 +44,8 @@ urlpatterns = [
 # TODO: (DONE) user is able to complete any test
 
 # TODO: REST API for creating tests
-
-# TODO: Unit tests: blog(DONE), fear_tracker(ALMOST DONE), psycho_tests(), users(DONE)
-
-# TODO: test should be accepted by admin
+# TODO: Unit tests: blog(DONE), fear_tracker(views-missing), users(models missing), psycho_tests()
+# TODO: created test should be accepted by admin
 # TODO: add hierarchy of users and authorization
 # TODO: on profile endpoint add availability to see user created tests and able to update tests?
 # TODO: add postgres db
