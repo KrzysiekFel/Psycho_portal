@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import PsychoTest, TestResult
+from .models import PsychoTest, TestResult, Answer
 from .forms import TestForm, TestFillForm
 from django.views.generic import CreateView, ListView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -28,24 +28,26 @@ class CreateTestView(LoginRequiredMixin, CreateView):
 
 class TestFillView(View):
     def get(self, request, test_id):
+        answers = Answer.objects.filter(psycho_test=test_id)
         test = PsychoTest.objects.get(pk=test_id)
         questions = test.questions.all()
-        form = TestFillForm(questions=questions)
+        form = TestFillForm(questions=questions, answers=answers)
         return render(request, 'psycho_tests/psycho_tests_detail.html', {'test': test, 'form': form})
 
     def post(self, request, test_id):
+        answers = Answer.objects.filter(psycho_test=test_id)
         test = PsychoTest.objects.get(pk=test_id)
         questions = test.questions.all()
-        form = TestFillForm(request.POST, questions=questions)
+        form = TestFillForm(request.POST, questions=questions, answers=answers)
 
         if form.is_valid():
             score = 0
+            id_number_of_first_answer = int(Answer.objects.filter(psycho_test=test_id).first().id)
+
             for question in questions:
                 choice = form.cleaned_data.get(f'question_{question.id}')
-                if choice == '1':
-                    score += 1
-                elif choice == '2':
-                    score += 2
+                score += int(choice) - id_number_of_first_answer  # this subtraction is needed to start counting from 0
+                # because choice value is answer id from table and id value will not start from 0
 
             user = request.user
             result = TestResult(score=score, test=test, user=user)

@@ -27,9 +27,9 @@ class FearTrackerViewTest(TestCase):
     def setUp(self):
         self.client = Client()
         self.test_user = User.objects.create(username='test_user', password='test_password')
-        self.response = self.client.get('/fear_tracker/')
 
     def test_if_correct_response_for_fear_tracker(self):
+        self.response = self.client.get('/fear_tracker/')
         self.assertEqual(self.response.status_code, 200)
         self.assertContains(self.response, 'Fear Tracker')
         self.assertTemplateUsed(self.response, 'fear_tracker/fear_tracker.html')
