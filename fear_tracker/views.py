@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,10 +6,6 @@ from .forms import FearTrackerForm
 from django.contrib import messages
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
-
-
-def fear_tracker(request):
-    return render(request, 'fear_tracker/fear_tracker.html', {'title': 'Fear Tracker'})
 
 
 class FearCreateView(LoginRequiredMixin, CreateView):
@@ -26,7 +21,7 @@ class FearCreateView(LoginRequiredMixin, CreateView):
 
 
 class YourChartView(LoginRequiredMixin, TemplateView):
-    template_name = 'fear_tracker/fear_tracker_plot.html'
+    template_name = 'fear_tracker/fear_tracker.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
