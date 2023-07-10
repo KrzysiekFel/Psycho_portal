@@ -3,6 +3,7 @@
 <h2>Psycho Tests</h2>
     <p></p>
     <a href="{% url 'create-test' %}" class="btn btn-primary">Create test</a>
+    <a href="{% url 'all-test-results' %}" class="btn btn-primary">Test Results</a>
     <p></p>
     <div class="row">
     {% for test in tests %}
