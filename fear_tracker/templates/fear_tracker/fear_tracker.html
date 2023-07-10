@@ -5,6 +5,10 @@
     It is suggested that records should be recorded every day at the same time.
     Tool is very useful for monitoring fear level during pharmacotherapy for Anxiety disorders like:
     Generalized Anxiety Disorder, Social anxiety disorder, Obsessive-compulsive disorder.</p>
-    <a href="{% url 'fear-create' %}" class="btn btn-primary">Add records</a>
-    <a href="{% url 'fear-plot' %}" class="btn btn-primary">Plots</a>
+    <a href="{% url 'fear-create' %}" class="btn btn-primary">Add record</a>
+        <div class="plot-container">
+            {% autoescape off %}
+            {{ plot_div }}
+            {% endautoescape %}
+        </div>
 {% endblock %}
