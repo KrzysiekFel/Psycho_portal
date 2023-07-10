@@ -75,3 +75,10 @@ class TestResultView(View):
         }
 
         return render(request, 'psycho_tests/psycho_tests_result.html', context)
+
+
+class AllTestResultView(LoginRequiredMixin, ListView):
+    model = TestResult
+    template_name = 'psycho_tests/psycho_tests_all_test_results.html'
+    context_object_name = 'results'
+    ordering = ['-date_creation']

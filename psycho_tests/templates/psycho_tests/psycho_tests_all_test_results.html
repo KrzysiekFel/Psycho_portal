@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Test Results</h2>
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Test Name</th>
+                    <th>Score</th>
+                    <th>Result</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.test.name }}</td>
+                    <td>{{ result.score }}</td>
+                    <td>
+                        {% if result.score >= result.test.threshold %}
+                            {{ result.test.result_above_threshold }}
+                        {% else %}
+                            {{ result.test.result_below_threshold }}
+                        {% endif %}
+                    </td>
+                    <td>{{ result.date_creation }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
