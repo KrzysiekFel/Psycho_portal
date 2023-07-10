@@ -29,6 +29,11 @@ class PsychoTest(models.Model):
             img.save(self.image.path)
 
 
+class Answer(models.Model):
+    answer = models.CharField(max_length=50)
+    psycho_test = models.ForeignKey(PsychoTest, on_delete=models.CASCADE)
+
+
 class TestResult(models.Model):
     score = models.IntegerField()
     date_creation = models.DateTimeField(default=timezone.now)

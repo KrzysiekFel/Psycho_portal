@@ -43,13 +43,20 @@ urlpatterns = [
 # TODO: (DANE) all tests visible at one endpoint
 # TODO: (DONE) user is able to complete any test
 
-# TODO: REST API for creating tests
+
+# TODO: (DONE) Modify creating tests, user should be able to set custom answers
+
+# TODO: Mypy + django-stubs
 # TODO: Unit tests: blog(DONE), fear_tracker(views-missing), users(models missing), psycho_tests()
 # TODO: created test should be accepted by admin
 # TODO: add hierarchy of users and authorization
-# TODO: on profile endpoint add availability to see user created tests and able to update tests?
+# TODO: add possibility to see results from all tests (report)
 # TODO: add postgres db
-
+# TODO: add possibility to modify and delete tests created by user
+# TODO: REST API for creating tests
+# TODO: Docker
+# TODO: Pre-commit
+# TODO: (for future): prepare more customized form for creating tests, many answers, different points...
 
 
 
