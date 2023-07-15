@@ -6,6 +6,7 @@
     Tool is very useful for monitoring fear level during pharmacotherapy for Anxiety disorders like:
     Generalized Anxiety Disorder, Social anxiety disorder, Obsessive-compulsive disorder.</p>
     <a href="{% url 'fear-create' %}" class="btn btn-primary">Add record</a>
+    <a href="{% url 'fear-list' %}" class="btn btn-primary">Delete records</a>
         <div class="plot-container">
             {% autoescape off %}
             {{ plot_div }}
