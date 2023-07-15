@@ -22,9 +22,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+    path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
-    path('api/', include('api.url')),
     path('fear_tracker/', include('fear_tracker.urls')),
     path('psycho_tests/', include('psycho_tests.urls')),
     path('profile/', users_view.profile, name='profile'),
@@ -47,6 +47,7 @@ urlpatterns = [
 
 # TODO: (DONE) Modify creating tests, user should be able to set custom answers
 # TODO: (DONE) add possibility to see results from all tests (report)
+# TODO: (DONE with PROBLEM) REST API for creating tests
 
 # TODO: Mypy + django-stubs
 # TODO: Unit tests: blog(DONE), fear_tracker(views-missing), users(models missing), psycho_tests()
@@ -54,8 +55,8 @@ urlpatterns = [
 # TODO: add hierarchy of users and authorization
 # TODO: add postgres db
 # TODO: add possibility to modify and delete tests created by user
-# TODO: user is able delete records from db for plot
-# TODO: REST API for creating tests
+# TODO: user is able to delete records from db for plot
+
 # TODO: Docker
 # TODO: Pre-commit
 

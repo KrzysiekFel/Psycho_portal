@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework.viewsets import generics
+from rest_framework.permissions import IsAuthenticated
+from .serializers import PsychoTestSerializer
 
-# Create your views here.
+
+class CreatePsychoTest(generics.CreateAPIView):
+    serializer_class = PsychoTestSerializer
+    permission_classes = [IsAuthenticated]
