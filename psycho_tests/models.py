@@ -31,7 +31,7 @@ class PsychoTest(models.Model):
 
 class Answer(models.Model):
     answer = models.CharField(max_length=50)
-    psycho_test = models.ForeignKey(PsychoTest, on_delete=models.CASCADE)
+    psycho_test = models.ForeignKey(PsychoTest, related_name='answers', on_delete=models.CASCADE)
 
 
 class TestResult(models.Model):
