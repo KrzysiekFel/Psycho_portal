@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'api.apps.ApiConfig'
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'fear_tracker.apps.FearTrackerConfig',

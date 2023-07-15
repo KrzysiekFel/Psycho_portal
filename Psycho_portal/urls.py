@@ -24,6 +24,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
+    path('api/', include('api.url')),
     path('fear_tracker/', include('fear_tracker.urls')),
     path('psycho_tests/', include('psycho_tests.urls')),
     path('profile/', users_view.profile, name='profile'),
