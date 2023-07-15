@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, TemplateView, DeleteView, ListView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import FearTracker
 from .forms import FearTrackerForm
 from django.contrib import messages
@@ -18,6 +18,28 @@ class FearCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         messages.success(self.request, 'Record added successfully.')
         return super().form_valid(form)
+
+
+class FearListView(LoginRequiredMixin, ListView):
+    model = FearTracker
+    template_name = 'fear_tracker/fear_tracker_list.html'
+    context_object_name = 'records'
+    ordering = ['-date']
+    paginate_by = 10
+
+
+class FearDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = FearTracker
+    template_name = 'fear_tracker/fear_tracker_delete.html'
+    success_url = reverse_lazy('fear-list')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Record deleted successfully.')
+        return super().delete(request, *args, **kwargs)
+
+    def test_func(self):
+        article = self.get_object()
+        return self.request.user == article.author
 
 
 class YourChartView(LoginRequiredMixin, TemplateView):

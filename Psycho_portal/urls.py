@@ -47,6 +47,9 @@ urlpatterns = [
 
 # TODO: (DONE) Modify creating tests, user should be able to set custom answers
 # TODO: (DONE) add possibility to see results from all tests (report)
+# TODO: (DONE) user is able to delete records from db for plot
+# TODO: (ONGOING) add possibility to modify and delete tests created by user
+
 # TODO: (DONE with PROBLEM) REST API for creating tests
 
 # TODO: Mypy + django-stubs
@@ -54,8 +57,6 @@ urlpatterns = [
 # TODO: created psycho test should be accepted by admin
 # TODO: add hierarchy of users and authorization
 # TODO: add postgres db
-# TODO: add possibility to modify and delete tests created by user
-# TODO: user is able to delete records from db for plot
 
 # TODO: Docker
 # TODO: Pre-commit
