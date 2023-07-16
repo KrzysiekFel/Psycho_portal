@@ -3,8 +3,8 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import PsychoTest, TestResult, Answer
 from .forms import TestForm, TestFillForm
-from django.views.generic import CreateView, ListView, View
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, ListView, View, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 class PsychoTestsListView(ListView):
@@ -82,3 +82,17 @@ class AllTestResultView(LoginRequiredMixin, ListView):
     template_name = 'psycho_tests/psycho_tests_all_test_results.html'
     context_object_name = 'results'
     ordering = ['-date_creation']
+
+
+class DeleteTestView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = PsychoTest
+    template_name = 'psycho_tests/psycho_tests_delete.html'
+    success_url = reverse_lazy('psycho-tests')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Record deleted successfully.')
+        return super().delete(request, *args, **kwargs)
+
+    def test_func(self):
+        article = self.get_object()
+        return self.request.user == article.author
