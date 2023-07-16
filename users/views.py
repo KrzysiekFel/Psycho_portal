@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 
 
-def register(request):
+def register(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -20,7 +20,7 @@ def register(request):
 
 
 @login_required
-def profile(request):
+def profile(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
