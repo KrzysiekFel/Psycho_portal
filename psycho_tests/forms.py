@@ -1,5 +1,6 @@
 from django import forms
 from .models import PsychoTest, Question, Answer
+from typing import Type, List, Dict
 
 
 class TestForm(forms.ModelForm):
@@ -24,10 +25,10 @@ class TestForm(forms.ModelForm):
                                         '1, 2.')
 
     class Meta:
-        model = PsychoTest
-        fields = ['name', 'image', 'description', 'threshold', 'result_above_threshold', 'result_below_threshold',
-                  'questions']
-        help_texts = {
+        model: Type[PsychoTest] = PsychoTest
+        fields: List[str] = ['name', 'image', 'description', 'threshold', 'result_above_threshold',
+                             'result_below_threshold', 'questions']
+        help_texts: Dict[str, str] = {
             'name': 'Test name.',
             'image': 'Add image, if not default will be added.',
             'description': 'What is your test about.',

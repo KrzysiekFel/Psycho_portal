@@ -49,8 +49,8 @@ urlpatterns = [
 # TODO: (DONE) add possibility to see results from all tests (report)
 # TODO: (DONE) user is able to delete records from db for plot
 # TODO: (DONE) add possibility to delete tests created by user
-# TODO: (DONE) Mypy + django-stubs
 
+# TODO: (DONE with problems) Mypy + django-stubs
 # TODO: (DONE with ERROR) REST API for creating tests
 # TODO: Unit tests: blog(DONE), fear_tracker(views-missing), users(models missing), psycho_tests(), api()
 
