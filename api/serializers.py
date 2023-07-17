@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from psycho_tests.models import PsychoTest, Question, Answer
+from psycho_tests.models import PsychoTest, Question, Answers
 from typing import Type, List, Dict, Any
 
 
@@ -11,7 +11,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Answer
+        model = Answers
         fields = "__all__"
 
 
@@ -36,6 +36,6 @@ class PsychoTestSerializer(serializers.ModelSerializer):
 
         for answer_data in answers_data:
             answer_data["psycho_test"] = psycho_test_instance.pk
-            Answer.objects.create(**answer_data)
+            Answers.objects.create(**answer_data)
 
         return psycho_test_instance

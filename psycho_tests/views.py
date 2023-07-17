@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import PsychoTest, TestResult, Answer
+from .models import PsychoTest, TestResult, Answers
 from .forms import TestForm, TestFillForm
 from django.views.generic import CreateView, ListView, View, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -30,26 +30,26 @@ class CreateTestView(LoginRequiredMixin, CreateView):
 
 class TestFillView(View):
     def get(self, request: HttpRequest, test_id: int) -> HttpResponse:
-        answers = Answer.objects.filter(psycho_test=test_id)
         test = PsychoTest.objects.get(pk=test_id)
+        answers_id = test.answers_id
+        answers = Answers.objects.get(pk=answers_id)
         questions = test.questions.all()
         form = TestFillForm(questions=questions, answers=answers)
         return render(request, 'psycho_tests/psycho_tests_detail.html', {'test': test, 'form': form})
 
     def post(self, request: HttpRequest, test_id: int) -> HttpResponse:
-        answers = Answer.objects.filter(psycho_test=test_id)
         test = PsychoTest.objects.get(pk=test_id)
+        answers_id = test.answers_id
+        answers = Answers.objects.get(pk=answers_id)
         questions = test.questions.all()
         form = TestFillForm(request.POST, questions=questions, answers=answers)
 
         if form.is_valid():
             score = 0
-            id_number_of_first_answer = int(Answer.objects.filter(psycho_test=test_id).first().id)
 
             for question in questions:
                 choice = form.cleaned_data.get(f'question_{question.id}')
-                score += int(choice) - id_number_of_first_answer  # this subtraction is needed to start counting from 0
-                # because choice value is answer id from table and id value will not start from 0
+                score += int(choice)
 
             user = request.user
             result = TestResult(score=score, test=test, user=user)

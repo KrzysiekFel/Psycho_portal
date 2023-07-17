@@ -59,12 +59,10 @@ urlpatterns = [
 # TODO: (DONE) REST API for creating tests
 # -------------------------------------
 
-# TODO: () modify answer model to have one row for all answers
+# TODO: (DONE) modify answer model to have one row for all answers
 # TODO: () modify rest api into 3 endpoints
 
 
-# array field dla answer , jeden row dla wszystkich odpowiedzi stworzonych
-# klucz do odpowiedz dac do psychotestu
 # 3 endpointy dla api create
 
 

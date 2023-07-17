@@ -6,20 +6,24 @@ from datetime import datetime
 
 
 class Question(models.Model):
-    question_content: str = models.CharField(max_length=150)
+    question_content = models.CharField(max_length=150)
+
+
+class Answers(models.Model):
+    answers = models.CharField(max_length=100)
 
 
 class PsychoTest(models.Model):  # PsychologyTest
-    date_creation: datetime = models.DateTimeField(default=timezone.now)
-    name: str = models.CharField(max_length=20)
+    date_creation = models.DateTimeField(default=timezone.now)
+    name = models.CharField(max_length=20)
     image = models.ImageField(default="default_test.jpg", upload_to="test_pics")
-    description: str = models.CharField(max_length=200)
-    threshold: int = models.IntegerField()
-    result_above_threshold: str = models.CharField(max_length=100)
-    result_below_threshold: str = models.CharField(max_length=100)
+    description = models.CharField(max_length=200)
+    threshold = models.IntegerField()
+    result_above_threshold = models.CharField(max_length=100)
+    result_below_threshold = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     questions = models.ManyToManyField("Question")
-    # answer = models
+    answers = models.ForeignKey(Answers, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -31,15 +35,8 @@ class PsychoTest(models.Model):  # PsychologyTest
             img.save(self.image.path)
 
 
-class Answer(models.Model):
-    answer: str = models.CharField(max_length=50)
-    psycho_test = models.ForeignKey(
-        PsychoTest, related_name="answers", on_delete=models.CASCADE
-    )
-
-
 class TestResult(models.Model):
-    score: int = models.IntegerField()
+    score = models.IntegerField()
     date_creation: datetime = models.DateTimeField(default=timezone.now)
     test = models.ForeignKey(PsychoTest, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
