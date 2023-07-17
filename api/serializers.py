@@ -5,14 +5,14 @@ from typing import Type, List, Dict, Any
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Type[Question] = Question
-        fields: List[str] = '__all__'
+        model = Question
+        fields = "__all__"
 
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Type[Answer] = Answer
-        fields: List[str] = '__all__'
+        model = Answer
+        fields = "__all__"
 
 
 class PsychoTestSerializer(serializers.ModelSerializer):
@@ -21,11 +21,11 @@ class PsychoTestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model: Type[PsychoTest] = PsychoTest
-        fields: List[str] = '__all__'
+        fields: List[str] = "__all__"
 
     def create(self, validated_data: Dict[str, Any]) -> PsychoTest:
-        questions_data: List[Dict[str, str]] = validated_data.pop('questions', [])
-        answers_data: List[Dict[str, str]] = validated_data.pop('answers', [])
+        questions_data: List[Dict[str, str]] = validated_data.pop("questions", [])
+        answers_data: List[Dict[str, str]] = validated_data.pop("answers", [])
 
         psycho_test_instance = PsychoTest.objects.create(**validated_data)
         for question_data in questions_data:
@@ -35,8 +35,7 @@ class PsychoTestSerializer(serializers.ModelSerializer):
             psycho_test_instance.questions.add(question_serializer.instance)
 
         for answer_data in answers_data:
-            answer_data['psycho_test'] = psycho_test_instance.pk
+            answer_data["psycho_test"] = psycho_test_instance.pk
             Answer.objects.create(**answer_data)
 
         return psycho_test_instance
-

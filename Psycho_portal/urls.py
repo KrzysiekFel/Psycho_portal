@@ -43,15 +43,25 @@ urlpatterns = [
 # TODO: (DONE) add possibility for user to create own test
 # TODO: (DANE) all tests visible at one endpoint
 # TODO: (DONE) user is able to complete any test
-
+# -------------------------------------
 
 # TODO: (DONE) Modify creating tests, user should be able to set custom answers
 # TODO: (DONE) add possibility to see results from all tests (report)
 # TODO: (DONE) user is able to delete records from db for plot
 # TODO: (DONE) add possibility to delete tests created by user
+# TODO: (DONE) Mypy + django-stubs
+# TODO: (DONE) REST API for creating tests
+# -------------------------------------
 
-# TODO: (DONE with problems) Mypy + django-stubs
-# TODO: (DONE with ERROR) REST API for creating tests
+# TODO: () modify answer model to have one row for all answers
+# TODO: () modify rest api into 3 endpoints
+
+
+# array field dla answer , jeden row dla wszystkich odpowiedzi stworzonych
+# klucz do odpowiedz dac do psychotestu
+# 3 endpointy dla api create
+
+
 # TODO: Unit tests: blog(DONE), fear_tracker(views-missing), users(models missing), psycho_tests(), api()
 
 # TODO: created psycho test should be accepted by admin, hierarchy of users and authorization

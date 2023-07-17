@@ -9,7 +9,7 @@ class Question(models.Model):
     question_content: str = models.CharField(max_length=150)
 
 
-class PsychoTest(models.Model):
+class PsychoTest(models.Model): # PsychologyTest
     date_creation: datetime = models.DateTimeField(default=timezone.now)
     name: str = models.CharField(max_length=20)
     image = models.ImageField(default="default_test.jpg", upload_to="test_pics")
@@ -19,6 +19,7 @@ class PsychoTest(models.Model):
     result_below_threshold: str = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     questions = models.ManyToManyField('Question')
+    #answer = models
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
