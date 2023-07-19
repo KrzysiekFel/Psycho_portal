@@ -65,7 +65,7 @@ urlpatterns = [
 # TODO: () correct mypy, dont type models and serializers, add to ignore them
 # TODO: () add env variable?
 # TODO: () Pre-commit - add flake to hooks
-# TODO: Unit tests: blog(DONE), fear_tracker(DONE), users(models missing), psycho_tests(), api()
+# TODO: Unit tests: blog(DONE), fear_tracker(DONE), users(), psycho_tests(), api()
 # TODO: created psycho test should be accepted by admin, hierarchy of users and authorization
 # TODO: add postgres db
 # TODO: README
