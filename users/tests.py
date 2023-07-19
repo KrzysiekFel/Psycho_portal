@@ -2,7 +2,6 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from .models import Profile
 from django.contrib.auth.models import User
-from .forms import UserUpdateForm, ProfileUpdateForm
 
 
 class RegisterViewTest(TestCase):
