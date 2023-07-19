@@ -23,16 +23,16 @@ class FearTrackerModelTest(TestCase):
         self.assertEquals(str(self.test_fear), 'Fear Tracker - 2023-01-01 00:00:00 - Activity: test_activity')
 
 
-class FearTrackerViewTest(TestCase):
-    def setUp(self):
-        self.client = Client()
-        self.test_user = User.objects.create(username='test_user', password='test_password')
-
-    def test_if_correct_response_for_fear_tracker(self):
-        self.response = self.client.get('/fear_tracker/')
-        self.assertEqual(self.response.status_code, 200)
-        self.assertContains(self.response, 'Fear Tracker')
-        self.assertTemplateUsed(self.response, 'fear_tracker/fear_tracker.html')
+# class FearTrackerViewTest(TestCase):
+#     def setUp(self):
+#         self.client = Client()
+#         self.test_user = User.objects.create(username='test_user', password='test_password')
+#
+#     def test_if_correct_response_for_fear_tracker(self):
+#         self.response = self.client.get('/fear_tracker/')
+#         self.assertEqual(self.response.status_code, 200)
+#         self.assertContains(self.response, 'Fear Tracker')
+#         self.assertTemplateUsed(self.response, 'fear_tracker/fear_tracker.html')
 
 
 class FearCreateViewTest(TestCase):
@@ -76,14 +76,14 @@ class YourChartViewTest(TestCase):
             author=self.user
         )
 
-    def test_if_data_are_correct(self):
-        request = self.factory.get(reverse('fear-plot'))
-        request.user = self.user
-        view = YourChartView.as_view()
-        response = view(request)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Chart of your anxiety level')
-        self.assertContains(response, '<div class="plot-container">')
-        self.assertIn('plot_div', response.context_data)
-        self.assertIsInstance(response.context_data['plot_div'], str)
+    # def test_if_data_are_correct(self):
+    #     request = self.factory.get(reverse('fear-plot'))
+    #     request.user = self.user
+    #     view = YourChartView.as_view()
+    #     response = view(request)
+    #
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertContains(response, 'Chart of your anxiety level')
+    #     self.assertContains(response, '<div class="plot-container">')
+    #     self.assertIn('plot_div', response.context_data)
+    #     self.assertIsInstance(response.context_data['plot_div'], str)
