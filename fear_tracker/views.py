@@ -6,6 +6,7 @@ from .forms import FearTrackerForm
 from django.contrib import messages
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
+from typing import Dict, Any, List
 
 
 class FearCreateView(LoginRequiredMixin, CreateView):
@@ -37,7 +38,7 @@ class FearDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         messages.success(self.request, 'Record deleted successfully.')
         return super().delete(request, *args, **kwargs)
 
-    def test_func(self):
+    def test_func(self) -> bool:
         article = self.get_object()
         return self.request.user == article.author
 
@@ -45,13 +46,13 @@ class FearDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class YourChartView(LoginRequiredMixin, TemplateView):
     template_name = 'fear_tracker/fear_tracker.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        user_id = self.request.user.id
-        queryset = FearTracker.objects.filter(author_id=user_id).order_by('date')
+        user_id: int = self.request.user.id
+        queryset: List[FearTracker] = FearTracker.objects.filter(author_id=user_id).order_by('date')
 
-        x = [f.date.strftime('%Y-%m-%d') for f in queryset]
-        y = [f.fear_level for f in queryset]
+        x: List[str] = [f.date.strftime('%Y-%m-%d') for f in queryset]
+        y: List[int] = [f.fear_level for f in queryset]
 
         plot_div = plot([Scatter(x=x, y=y, mode='lines', name='test', opacity=0.8, marker_color='green')],
                         output_type='div')

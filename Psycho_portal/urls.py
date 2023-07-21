@@ -22,15 +22,21 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('api/', include('api.urls')),
-    path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
-    path('fear_tracker/', include('fear_tracker.urls')),
-    path('psycho_tests/', include('psycho_tests.urls')),
-    path('profile/', users_view.profile, name='profile'),
-    path('register/', users_view.register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path("api/", include("api.urls")),
+    path("admin/", admin.site.urls),
+    path("", include("blog.urls")),
+    path("fear_tracker/", include("fear_tracker.urls")),
+    path("psycho_tests/", include("psycho_tests.urls")),
+    path("profile/", users_view.profile, name="profile"),
+    path("register/", users_view.register, name="register"),
+    path(
+        "login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"
+    ),
+    path(
+        "logout/",
+        auth_views.LogoutView.as_view(template_name="logout.html"),
+        name="logout",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # TODO: (DONE) modify template folders
@@ -41,25 +47,26 @@ urlpatterns = [
 # TODO: (DONE) center profile picture and delete in post details click on author
 # TODO: (DONE) modify models for tests/questions
 # TODO: (DONE) add possibility for user to create own test
-# TODO: (DANE) all tests visible at one endpoint
+# TODO: (DONE) all tests visible at one endpoint
 # TODO: (DONE) user is able to complete any test
-
+# -------------------------------------
 
 # TODO: (DONE) Modify creating tests, user should be able to set custom answers
 # TODO: (DONE) add possibility to see results from all tests (report)
 # TODO: (DONE) user is able to delete records from db for plot
-# TODO: (ONGOING) add possibility to modify and delete tests created by user
+# TODO: (DONE) add possibility to delete tests created by user
+# TODO: (DONE) Mypy + django-stubs
+# TODO: (DONE) REST API for creating tests
+# -------------------------------------
 
-# TODO: (DONE with PROBLEM) REST API for creating tests
+# TODO: (DONE) modify answer model to have one row for all answers
+# TODO: (DONE) modify rest api to have 3 endpoints
+# TODO: Unit tests: blog(DONE), fear_tracker(DONE), users(DONE), psycho_tests(DONE), api()
 
-# TODO: Mypy + django-stubs
-# TODO: Unit tests: blog(DONE), fear_tracker(views-missing), users(models missing), psycho_tests()
-# TODO: created psycho test should be accepted by admin
-# TODO: add hierarchy of users and authorization
+# TODO: () correct mypy, don't type models and serializers, add to ignore them
+# TODO: () add env variable?
+# TODO: () Pre-commit - add flake to hooks
+# TODO: created psycho test should be accepted by admin, hierarchy of users and authorization
 # TODO: add postgres db
-
+# TODO: README
 # TODO: Docker
-# TODO: Pre-commit
-
-
-

@@ -1,23 +1,25 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import PsychoTest, TestResult, Answer
+from .models import PsychoTest, TestResult, Answers
 from .forms import TestForm, TestFillForm
-from django.views.generic import CreateView, ListView, View
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, ListView, View, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from typing import Type, List, Dict, Any
+from django.http import HttpRequest, HttpResponse
 
 
 class PsychoTestsListView(ListView):
-    model = PsychoTest
-    template_name = 'psycho_tests/psycho_tests_home.html'
-    context_object_name = 'tests'
-    ordering = ['-date_creation']
+    model: Type[PsychoTest] = PsychoTest
+    template_name: str = 'psycho_tests/psycho_tests_home.html'
+    context_object_name: str = 'tests'
+    ordering: List[str] = ['-date_creation']
 
 
 class CreateTestView(LoginRequiredMixin, CreateView):
-    model = PsychoTest
+    model: Type[PsychoTest] = PsychoTest
     form_class = TestForm
-    template_name = 'psycho_tests/psycho_tests_create.html'
+    template_name: str = 'psycho_tests/psycho_tests_create.html'
     success_url = reverse_lazy('psycho-tests')
 
     def form_valid(self, form):
@@ -27,27 +29,27 @@ class CreateTestView(LoginRequiredMixin, CreateView):
 
 
 class TestFillView(View):
-    def get(self, request, test_id):
-        answers = Answer.objects.filter(psycho_test=test_id)
+    def get(self, request: HttpRequest, test_id: int) -> HttpResponse:
         test = PsychoTest.objects.get(pk=test_id)
+        answers_id = test.answers_id
+        answers = Answers.objects.get(pk=answers_id)
         questions = test.questions.all()
         form = TestFillForm(questions=questions, answers=answers)
         return render(request, 'psycho_tests/psycho_tests_detail.html', {'test': test, 'form': form})
 
-    def post(self, request, test_id):
-        answers = Answer.objects.filter(psycho_test=test_id)
+    def post(self, request: HttpRequest, test_id: int) -> HttpResponse:
         test = PsychoTest.objects.get(pk=test_id)
+        answers_id = test.answers_id
+        answers = Answers.objects.get(pk=answers_id)
         questions = test.questions.all()
         form = TestFillForm(request.POST, questions=questions, answers=answers)
 
         if form.is_valid():
             score = 0
-            id_number_of_first_answer = int(Answer.objects.filter(psycho_test=test_id).first().id)
 
             for question in questions:
                 choice = form.cleaned_data.get(f'question_{question.id}')
-                score += int(choice) - id_number_of_first_answer  # this subtraction is needed to start counting from 0
-                # because choice value is answer id from table and id value will not start from 0
+                score += int(choice)
 
             user = request.user
             result = TestResult(score=score, test=test, user=user)
@@ -59,7 +61,7 @@ class TestFillView(View):
 
 
 class TestResultView(View):
-    def get(self, request, result_id):
+    def get(self, request: HttpRequest, result_id: int) -> HttpResponse:
         result = TestResult.objects.get(pk=result_id)
         test = result.test
 
@@ -68,7 +70,7 @@ class TestResultView(View):
         else:
             result_description = test.result_below_threshold
 
-        context = {
+        context: Dict[str, Any] = {
             'result': result,
             'test': test,
             'result_description': result_description
@@ -78,7 +80,21 @@ class TestResultView(View):
 
 
 class AllTestResultView(LoginRequiredMixin, ListView):
-    model = TestResult
-    template_name = 'psycho_tests/psycho_tests_all_test_results.html'
-    context_object_name = 'results'
-    ordering = ['-date_creation']
+    model: Type[TestResult] = TestResult
+    template_name: str = 'psycho_tests/psycho_tests_all_test_results.html'
+    context_object_name: str = 'results'
+    ordering: List[str] = ['-date_creation']
+
+
+class DeleteTestView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model: Type[PsychoTest] = PsychoTest
+    template_name: str = 'psycho_tests/psycho_tests_delete.html'
+    success_url = reverse_lazy('psycho-tests')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Record deleted successfully.')
+        return super().delete(request, *args, **kwargs)
+
+    def test_func(self):
+        article = self.get_object()
+        return self.request.user == article.author

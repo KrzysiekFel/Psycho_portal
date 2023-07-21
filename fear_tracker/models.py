@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from typing import List, Tuple
 
-ANXIETY_CHOICES = [
+ANXIETY_CHOICES: List[Tuple[int, str]] = [
     (1, 'Minimal anxiety'),
     (2, 'Mild anxiety'),
     (3, 'Moderate anxiety'),
@@ -12,10 +13,10 @@ ANXIETY_CHOICES = [
 
 class FearTracker(models.Model):
     date = models.DateField()
-    time = models.TimeField(blank=True)
-    activity = models.CharField(max_length=100, blank=True)
-    fear_level = models.IntegerField(choices=ANXIETY_CHOICES)
-    disturbing_thoughts = models.CharField(max_length=100, blank=True)
+    time = models.TimeField()
+    activity: str = models.CharField(max_length=100, blank=True)
+    fear_level: int = models.IntegerField(choices=ANXIETY_CHOICES)
+    disturbing_thoughts: str = models.CharField(max_length=100, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
