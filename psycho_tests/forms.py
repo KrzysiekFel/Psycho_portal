@@ -61,10 +61,6 @@ class TestForm(forms.ModelForm):
                     question = Question.objects.create(question_content=custom_question_content)
                     test.questions.add(question)
 
-        # answers_list = answers.split(';')
-        # for answer in answers_list:
-        #     Answers.objects.create(answer=answer, psycho_test=test)
-
         return test
 
 
