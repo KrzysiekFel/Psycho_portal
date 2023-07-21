@@ -61,7 +61,7 @@ urlpatterns = [
 
 # TODO: (DONE) modify answer model to have one row for all answers
 # TODO: (DONE) modify rest api to have 3 endpoints
-# TODO: Unit tests: blog(DONE), fear_tracker(DONE), users(DONE), psycho_tests(), api()
+# TODO: Unit tests: blog(DONE), fear_tracker(DONE), users(DONE), psycho_tests(DONE), api()
 
 # TODO: () correct mypy, don't type models and serializers, add to ignore them
 # TODO: () add env variable?
