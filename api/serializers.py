@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from psycho_tests.models import PsychoTest, Question, Answers
-from typing import Type, List, Dict, Any
 
 
 class QuestionsSerializer(serializers.ModelSerializer):

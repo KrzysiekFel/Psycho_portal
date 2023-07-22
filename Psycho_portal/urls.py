@@ -62,9 +62,10 @@ urlpatterns = [
 # TODO: (DONE) modify answer model to have one row for all answers
 # TODO: (DONE) modify rest api to have 3 endpoints
 # TODO: (DONE) Unit tests
+# TODO: (DONE) add env variable
 
 # TODO: () correct mypy, don't type models and serializers, add to ignore them
-# TODO: () add env variable?
+
 # TODO: () Pre-commit - add flake to hooks
 # TODO: created psycho test should be accepted by admin, hierarchy of users and authorization
 # TODO: add postgres db

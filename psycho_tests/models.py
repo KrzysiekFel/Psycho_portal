@@ -37,6 +37,6 @@ class PsychoTest(models.Model):  # PsychologyTest
 
 class TestResult(models.Model):
     score = models.IntegerField()
-    date_creation: datetime = models.DateTimeField(default=timezone.now)
+    date_creation = models.DateTimeField(default=timezone.now)
     test = models.ForeignKey(PsychoTest, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

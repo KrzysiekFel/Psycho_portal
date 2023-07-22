@@ -14,9 +14,9 @@ ANXIETY_CHOICES: List[Tuple[int, str]] = [
 class FearTracker(models.Model):
     date = models.DateField()
     time = models.TimeField()
-    activity: str = models.CharField(max_length=100, blank=True)
-    fear_level: int = models.IntegerField(choices=ANXIETY_CHOICES)
-    disturbing_thoughts: str = models.CharField(max_length=100, blank=True)
+    activity = models.CharField(max_length=100, blank=True)
+    fear_level = models.IntegerField(choices=ANXIETY_CHOICES)
+    disturbing_thoughts = models.CharField(max_length=100, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
