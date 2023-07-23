@@ -44,7 +44,7 @@ urlpatterns = [
 # TODO: (DONE) after viewing post add button to get back to all posts
 # TODO: (DONE) change plots for plotly (dynamically created)
 # TODO: (DONE) add photo for users
-# TODO: (DONE) center profile picture and delete in post details click on author
+# TODO: (DONE) center profile picture and delete in post detail click on auth
 # TODO: (DONE) modify models for tests/questions
 # TODO: (DONE) add possibility for user to create own test
 # TODO: (DONE) all tests visible at one endpoint
@@ -57,17 +57,16 @@ urlpatterns = [
 # TODO: (DONE) add possibility to delete tests created by user
 # TODO: (DONE) Mypy + django-stubs
 # TODO: (DONE) REST API for creating tests
+# TODO: (DONE) Pre-commit
 # -------------------------------------
 
 # TODO: (DONE) modify answer model to have one row for all answers
 # TODO: (DONE) modify rest api to have 3 endpoints
 # TODO: (DONE) Unit tests
 # TODO: (DONE) add env variable
+# TODO: (DONE with errors) correct mypy, don't type models and serializers
 
-# TODO: () correct mypy, don't type models and serializers, add to ignore them
-
-# TODO: () Pre-commit - add flake to hooks
-# TODO: created psycho test should be accepted by admin, hierarchy of users and authorization
+# TODO: created psycho test should be accepted by admin, authorization
 # TODO: add postgres db
 # TODO: README
 # TODO: Docker

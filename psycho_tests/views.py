@@ -15,6 +15,9 @@ class PsychoTestsListView(ListView):
     context_object_name: str = 'tests'
     ordering: List[str] = ['-date_creation']
 
+    def get_queryset(self):
+        return super().get_queryset().filter(status='published')
+
 
 class CreateTestView(LoginRequiredMixin, CreateView):
     model: Type[PsychoTest] = PsychoTest
