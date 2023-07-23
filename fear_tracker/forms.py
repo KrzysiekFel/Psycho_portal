@@ -8,7 +8,7 @@ class FearTrackerForm(forms.ModelForm):
     class Meta:
         model: Type[FearTracker] = FearTracker
         fields: List[str] = ['date', 'fear_level', 'time', 'activity', 'disturbing_thoughts']
-        widgets = {
+        widgets: Dict[str, forms.widgets.Widget] = {
             'date': DatePickerInput(),
             'time': TimePickerInput(),
         }

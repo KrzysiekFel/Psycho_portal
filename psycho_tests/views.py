@@ -15,6 +15,9 @@ class PsychoTestsListView(ListView):
     context_object_name: str = 'tests'
     ordering: List[str] = ['-date_creation']
 
+    def get_queryset(self):
+        return super().get_queryset().filter(status='published')
+
 
 class CreateTestView(LoginRequiredMixin, CreateView):
     model: Type[PsychoTest] = PsychoTest
@@ -31,7 +34,7 @@ class CreateTestView(LoginRequiredMixin, CreateView):
 class TestFillView(View):
     def get(self, request: HttpRequest, test_id: int) -> HttpResponse:
         test = PsychoTest.objects.get(pk=test_id)
-        answers_id = test.answers_id
+        answers_id: int = test.answers_id
         answers = Answers.objects.get(pk=answers_id)
         questions = test.questions.all()
         form = TestFillForm(questions=questions, answers=answers)
@@ -39,13 +42,13 @@ class TestFillView(View):
 
     def post(self, request: HttpRequest, test_id: int) -> HttpResponse:
         test = PsychoTest.objects.get(pk=test_id)
-        answers_id = test.answers_id
+        answers_id: int = test.answers_id
         answers = Answers.objects.get(pk=answers_id)
         questions = test.questions.all()
         form = TestFillForm(request.POST, questions=questions, answers=answers)
 
         if form.is_valid():
-            score = 0
+            score: int = 0
 
             for question in questions:
                 choice = form.cleaned_data.get(f'question_{question.id}')
@@ -84,6 +87,9 @@ class AllTestResultView(LoginRequiredMixin, ListView):
     template_name: str = 'psycho_tests/psycho_tests_all_test_results.html'
     context_object_name: str = 'results'
     ordering: List[str] = ['-date_creation']
+
+    def get_queryset(self):
+        return TestResult.objects.filter(user=self.request.user)
 
 
 class DeleteTestView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):

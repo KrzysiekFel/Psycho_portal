@@ -3,6 +3,7 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
+from typing import Optional
 
 
 def register(request: HttpRequest) -> HttpResponse:

@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import QuestionsSerializer, AnswersSerializer, PsychoTestSerializer
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
+from django.http import HttpRequest, HttpResponse
 
 
 class CreateQuestions(generics.ListCreateAPIView):
@@ -14,7 +15,7 @@ class CreateQuestions(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Question.objects.all()
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs) -> HttpResponse:
         if isinstance(request.data, list):
             data = request.data
         else:
@@ -36,7 +37,7 @@ class CreateAnswers(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Answers.objects.all()
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs) -> HttpResponse:
         if isinstance(request.data, list):
             data = request.data
         else:
@@ -58,7 +59,7 @@ class CreatePsychoTest(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     queryset = PsychoTest.objects.all()
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs) -> HttpResponse:
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)

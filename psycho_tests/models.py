@@ -2,7 +2,11 @@ from django.db import models
 from PIL import Image
 from django.utils import timezone
 from django.contrib.auth.models import User
-from datetime import datetime
+
+STATUS_CHOICES = (
+    ('pending', 'Pending'),
+    ('published', 'Published'),
+)
 
 
 class Question(models.Model):
@@ -22,6 +26,7 @@ class PsychoTest(models.Model):  # PsychologyTest
     result_above_threshold = models.CharField(max_length=100)
     result_below_threshold = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='pending')
     questions = models.ManyToManyField("Question")
     answers = models.ForeignKey(Answers, on_delete=models.SET_NULL, null=True)
 
@@ -37,6 +42,6 @@ class PsychoTest(models.Model):  # PsychologyTest
 
 class TestResult(models.Model):
     score = models.IntegerField()
-    date_creation: datetime = models.DateTimeField(default=timezone.now)
+    date_creation = models.DateTimeField(default=timezone.now)
     test = models.ForeignKey(PsychoTest, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

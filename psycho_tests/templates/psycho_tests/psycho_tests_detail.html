@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
     <div style="text-align: right;">
-        <a class="btn btn-danger" href="{% url 'delete-test' test.id %}">Delete</a>
+        {% if test.author == request.user %}
+            <a class="btn btn-danger" href="{% url 'delete-test' test.id %}">Delete</a>
+        {%  endif %}
     </div>
   <h2>{{ test.name }}</h2>
     <form method="post">

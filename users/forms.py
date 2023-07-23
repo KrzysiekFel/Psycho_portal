@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from django.contrib.auth.forms import User
+from django.contrib.auth.models import User
 from .models import Profile
 from typing import Type, List
 
@@ -23,5 +23,5 @@ class UserUpdateForm(forms.ModelForm):
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
-        model: Type[User] = Profile
+        model: Type[Profile] = Profile
         fields: List[str] = ['image']
