@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import PsychoTest, TestResult, Answers
@@ -33,16 +33,16 @@ class CreateTestView(LoginRequiredMixin, CreateView):
 
 class TestFillView(View):
     def get(self, request: HttpRequest, test_id: int) -> HttpResponse:
-        test = PsychoTest.objects.get(pk=test_id)
-        answers_id: int = test.answers_id
-        answers = Answers.objects.get(pk=answers_id)
+        print(type(test_id))
+        test = get_object_or_404(PsychoTest, pk=test_id)
+        answers = get_object_or_404(Answers, pk=test.answers_id)
         questions = test.questions.all()
         form = TestFillForm(questions=questions, answers=answers)
         return render(request, 'psycho_tests/psycho_tests_detail.html', {'test': test, 'form': form})
 
     def post(self, request: HttpRequest, test_id: int) -> HttpResponse:
         test = PsychoTest.objects.get(pk=test_id)
-        answers_id: int = test.answers_id
+        answers_id: int | None = test.answers_id
         answers = Answers.objects.get(pk=answers_id)
         questions = test.questions.all()
         form = TestFillForm(request.POST, questions=questions, answers=answers)
