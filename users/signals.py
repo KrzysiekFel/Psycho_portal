@@ -13,6 +13,8 @@ from typing import Type
 def create_profile(sender: Type[User], instance: User, created: bool, **kwargs) -> None:
     if created:
         Profile.objects.create(user=instance)
+        author_group = Group.objects.get(name="Author")
+        instance.groups.add(author_group)
 
 
 @receiver(post_save, sender=User)

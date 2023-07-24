@@ -4,6 +4,9 @@
     <p></p>
     <a href="{% url 'create-test' %}" class="btn btn-primary">Create test</a>
     <a href="{% url 'all-test-results' %}" class="btn btn-primary">Test Results</a>
+    {% if is_publisher %}
+        <a href="{% url 'tests-to-publish' %}" class="btn btn-primary">Publish Tests</a>
+    {% endif %}
     <p></p>
     <div class="row">
     {% for test in tests %}
@@ -28,4 +31,3 @@
     {% endfor %}
 </div>
 {% endblock %}
-
