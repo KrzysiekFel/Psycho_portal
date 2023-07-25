@@ -65,8 +65,11 @@ urlpatterns = [
 # TODO: (DONE) Unit tests
 # TODO: (DONE) add env variable
 # TODO: (DONE with errors) correct mypy, don't type models and serializers
+# TODO: (DONE) psycho test needs to be accepted by admin before ready to use
+# -------------------------------------
 
-# TODO: created psycho test should be accepted by admin, authorization
+# TODO: (DONE) permissions
+
 # TODO: add postgres db
+# TODO: Docker - Django APP, PostgreSQL, PGAdmin*
 # TODO: README
-# TODO: Docker
