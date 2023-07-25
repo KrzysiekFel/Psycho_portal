@@ -68,7 +68,8 @@ urlpatterns = [
 # TODO: (DONE) psycho test needs to be accepted by admin before ready to use
 # -------------------------------------
 
-# TODO: permissions
+# TODO: (DONE) permissions
+
 # TODO: add postgres db
 # TODO: Docker - Django APP, PostgreSQL, PGAdmin*
 # TODO: README

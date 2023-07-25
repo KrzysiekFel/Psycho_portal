@@ -2,6 +2,8 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Question, PsychoTest, Answers
+from django.contrib.auth.models import Group, Permission
+from django.contrib.contenttypes.models import ContentType
 
 
 class PsychoTestsListViewTest(TestCase):
@@ -130,3 +132,81 @@ class TestViewFillResultDeleteTest(TestCase):
         self.assertFalse(PsychoTest.objects.filter(name='test_name').exists())
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'psycho_tests/psycho_tests_home.html')
+
+
+class PendingPsychoTestListViewTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        # setting groups
+        author_group, _ = Group.objects.get_or_create(name="Author")
+        publisher_group, _ = Group.objects.get_or_create(name="Publisher")
+        for model in [Answers, Question, PsychoTest]:
+            content_type = ContentType.objects.get_for_model(model)
+            post_permission = Permission.objects.filter(content_type=content_type)
+            model_delete = f"delete_{model.__name__.lower()}"
+            model_change = f"change_{model.__name__.lower()}"
+            for perm in post_permission:
+                if perm.codename in [model_delete, model_change]:
+                    publisher_group.permissions.add(perm)
+                else:
+                    author_group.permissions.add(perm)
+                    publisher_group.permissions.add(perm)
+
+        # setting users
+        cls.user_author = User.objects.create_user(username='test_user_author', password='test_password')
+        cls.user_publisher = User.objects.create_user(username='test_user_publisher', password='test_password')
+        cls.user_author.groups.add(author_group)
+        cls.user_publisher.groups.add(publisher_group)
+
+        # setting tests
+        cls.question1 = Question.objects.create(question_content='test_content_1')
+        cls.question2 = Question.objects.create(question_content='test_content_2')
+        cls.answers = Answers.objects.create(answers='test_answer1;test_answer2;test_answer3')
+        cls.test_pending = PsychoTest.objects.create(
+            name='test_name_pending',
+            description='test_description',
+            threshold=1,
+            result_above_threshold='test_above',
+            result_below_threshold='test_below',
+            author=cls.user_author,
+            answers=cls.answers
+        )
+        cls.test_pending.questions.add(cls.question1, cls.question2)
+        cls.test_published = PsychoTest.objects.create(
+            name='test_name_published',
+            description='test_description',
+            threshold=1,
+            result_above_threshold='test_above',
+            result_below_threshold='test_below',
+            author=cls.user_author,
+            answers=cls.answers,
+            status='published'
+        )
+        cls.test_published.questions.add(cls.question1, cls.question2)
+
+    def test_pending_tests_list_view_for_publisher(self):
+        self.client.login(username='test_user_publisher', password='test_password')
+        url = reverse('tests-to-publish')
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(self.test_pending, response.context['pending_tests'])
+        self.assertNotIn(self.test_published, response.context['pending_tests'])
+        self.assertTemplateUsed(response, 'psycho_tests/psycho_tests_to_publish.html')
+        self.assertContains(response, self.test_pending.name)
+        self.assertNotContains(response, self.test_published.name)
+
+    def test_pending_tests_list_view_for_author(self):
+        self.client.login(username='test_user_author', password='test_password')
+        url = reverse('tests-to-publish')
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 403)
+
+    def test_if_pending_test_is_correctly_published(self):
+        self.client.login(username='test_user_publisher', password='test_password')
+        url = reverse('publish-test', args=[self.test_pending.id])
+        response = self.client.get(url)
+        self.assertRedirects(response, reverse('psycho-tests'))
+        updated_test = PsychoTest.objects.get(id=self.test_pending.id)
+        self.assertEqual(updated_test.status, "published")

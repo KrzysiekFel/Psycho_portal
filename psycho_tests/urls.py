@@ -17,10 +17,6 @@ urlpatterns = [
     path("result/<int:result_id>/", TestResultView.as_view(), name="test-result"),
     path("results/", AllTestResultView.as_view(), name="all-test-results"),
     path("delete_test/<int:pk>/", DeleteTestView.as_view(), name="delete-test"),
-    path(
-        "tests_to_publish/",
-        PendingPsychoTestListView.as_view(),
-        name="tests-to-publish",
-    ),
+    path("tests_to_publish/", PendingPsychoTestListView.as_view(), name="tests-to-publish"),
     path("publish/<int:test_id>/", publish_test, name="publish-test"),
 ]
