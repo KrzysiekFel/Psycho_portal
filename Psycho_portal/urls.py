@@ -69,7 +69,7 @@ urlpatterns = [
 # -------------------------------------
 
 # TODO: (DONE) permissions
+# TODO: (DONE) add postgres db
 
-# TODO: add postgres db
 # TODO: Docker - Django APP, PostgreSQL, PGAdmin*
 # TODO: README
