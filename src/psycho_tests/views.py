@@ -17,6 +17,7 @@ class PsychoTestsListView(ListView):
     model: Type[PsychoTest] = PsychoTest
     template_name: str = "psycho_tests/psycho_tests_home.html"
     context_object_name: str = "tests"
+
     ordering: List[str] = ["-date_creation"]
 
     def get_queryset(self):

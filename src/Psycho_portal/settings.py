@@ -21,7 +21,10 @@ env = environ.Env(DEBUG=(bool, False),
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+ENV_DIR = os.path.join(os.path.dirname(BASE_DIR), '.env')
+
+environ.Env.read_env(ENV_DIR)
 
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
